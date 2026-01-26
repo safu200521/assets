@@ -21,18 +21,18 @@ jobs:
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
         token: ${{ secrets.GITHUB_TOKEN }}
       
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.10'
         
     - name: Cache pip dependencies
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
@@ -46,9 +46,8 @@ jobs:
         
     - name: Run Bug Bounty Monitor
       env:
-        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        DISCORD_WEBHOOK: https://discord.com/api/webhooks/1462413082793087155/aepJjYPcz7hcsQe4f2ioIVAOX0xo3tc4DtVQuYtmmg1VGTSuEIfelRZNbiT_4wat-ZKE
+      
       run: |
         echo "Starting Bug Bounty Monitor..."
         python monitor.py
@@ -63,7 +62,7 @@ jobs:
       continue-on-error: true
       
     - name: Upload state file as artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: monitor-state
