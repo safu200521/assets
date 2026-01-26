@@ -9,7 +9,7 @@ on:
     branches:
       - main
     paths:
-      - 'monitor.py'
+      - 'main.py'
       - '.github/workflows/monitor.yml'
 
 jobs:
@@ -50,7 +50,7 @@ jobs:
       
       run: |
         echo "Starting Bug Bounty Monitor..."
-        python monitor.py
+        python main.py
         echo "Monitor completed successfully!"
       
     - name: Commit and push state changes
